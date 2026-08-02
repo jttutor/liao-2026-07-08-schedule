@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>第6梯課表（家長版）</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; background: #F7F6F3; padding: 32px; color: #37352F; }
+.school { font-size: 14px; color: #C9A24E; font-weight: 700; letter-spacing: 3px; text-align: center; margin-bottom: 6px; }
+.page-title { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: #9B9A97; text-align: center; margin-bottom: 12px; }
+.legend2 { display: flex; justify-content: center; gap: 18px; margin-bottom: 20px; flex-wrap: wrap; }
+.legend2 span { font-size: 12px; color: #6B6B6B; display: flex; align-items: center; gap: 5px; }
+.badge-tf { background: #E7F5FF; color: #1971C2; border-radius: 10px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
+.badge-ys { background: #E3FAFC; color: #0B7285; border-radius: 10px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
+.badge-liao { background: #FFF0E6; color: #D9480F; border-radius: 10px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
+
+.mei-title { background: #37352F; color: white; padding: 11px 18px; font-size: 15px; font-weight: 700; border-radius: 8px 8px 0 0; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }
+.mei-title .people { font-size: 13px; color: #FAB005; }
+.table { background: white; border-radius: 0 0 8px 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+.row { display: grid; grid-template-columns: 84px repeat(5, 1fr); border-bottom: 1px solid #E9E9E7; }
+.row:last-child { border-bottom: none; }
+.cell { padding: 9px 6px; border-right: 1px solid #E9E9E7; font-size: 13px; text-align: center; }
+.cell:last-child { border-right: none; }
+.cell.time { font-weight: 700; font-size: 11px; color: #9B9A97; background: #FBFBFA; display: flex; align-items: center; justify-content: center; }
+.cell.head { background: #F7F6F3; font-weight: 700; padding: 9px 4px; }
+.cell.head .wk { font-size: 15px; }
+.cell.head .dt { font-size: 12px; color: #9B9A97; margin-top: 2px; }
+
+.subj { font-weight: 600; font-size: 13px; }
+.teacher { font-size: 11px; color: #9B9A97; margin-top: 2px; }
+.sub { color: #C2255C; }
+.assist { font-size: 10px; margin-top: 3px; display: inline-block; padding: 1px 7px; border-radius: 9px; font-weight: 700; }
+.assist.tf { background: #E7F5FF; color: #1971C2; }
+.assist.ys { background: #E3FAFC; color: #0B7285; }
+.assist.liao { background: #FFF0E6; color: #D9480F; }
+.lunch-row { background: #FFF9DB; }
+.lunch-row .cell { color: #E67700; font-size: 12px; font-weight: 600; }
+.note { text-align: center; font-size: 12px; color: #E67700; margin-top: 12px; }
+.foot { text-align: center; font-size: 11px; color: #B3B2AE; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="school">兆婷藝術學院</div>
+<div class="page-title">2026 暑假夏令營　第 6 梯（家長版）</div>
+<div class="page-sub">8/3（一）～ 8/7（五）　每日 9:10 ~ 16:30</div>
+
+<div class="mei-title">第 6 梯　8/3 ～ 8/7 </div>
+<div class="table">
+    <div class="row">
+        <div class="cell time">時段</div>
+        <div class="cell head"><div class="wk">一</div><div class="dt">8/3</div></div>
+        <div class="cell head"><div class="wk">二</div><div class="dt">8/4</div></div>
+        <div class="cell head"><div class="wk">三</div><div class="dt">8/5</div></div>
+        <div class="cell head"><div class="wk">四</div><div class="dt">8/6</div></div>
+        <div class="cell head"><div class="wk">五</div><div class="dt">8/7</div></div>
+    </div>
+    <div class="row">
+        <div class="cell time">9:10<br>10:10</div>
+        <div class="cell"><div class="subj">魔術</div></div>
+        <div class="cell"><div class="subj">4D吸管</div></div>
+        <div class="cell"><div class="subj">科學</div></div>
+        <div class="cell"><div class="subj">疊杯</div></div>
+        <div class="cell"><div class="subj">音樂</div></div>
+    </div>
+    <div class="row">
+        <div class="cell time">10:20<br>11:50</div>
+        <div class="cell"><div class="subj">氣球</div></div>
+        <div class="cell"><div class="subj">圍棋</div></div>
+        <div class="cell"><div class="subj">魔方</div></div>
+        <div class="cell"><div class="subj">書法</div></div>
+        <div class="cell"><div class="subj">黏土</div></div>
+    </div>
+    <div class="row lunch-row">
+        <div class="cell time">11:50<br>13:20</div>
+        <div class="cell">午休</div><div class="cell">午休</div><div class="cell">午休</div><div class="cell">午休</div><div class="cell">午休</div>
+    </div>
+    <div class="row">
+        <div class="cell time">13:20<br>14:50</div>
+        <div class="cell"><div class="subj">拼豆</div></div>
+        <div class="cell"><div class="subj">科學</div></div>
+        <div class="cell"><div class="subj">氣球</div></div>
+        <div class="cell"><div class="subj">水墨</div></div>
+        <div class="cell"><div class="subj">圍棋</div></div>
+    </div>
+    <div class="row">
+        <div class="cell time">15:00<br>16:30</div>
+        <div class="cell"><div class="subj">疊杯</div></div>
+        <div class="cell"><div class="subj">魔方</div></div>
+        <div class="cell"><div class="subj">音樂</div></div>
+        <div class="cell"><div class="subj">藝術創作</div></div>
+        <div class="cell"><div class="subj">魔術</div></div>
+    </div>
+</div>
+<div class="foot">兆婷藝術學院　·　宜蘭市吉祥路 120 號　·　LINE @218iavpg</div>
+</body>
+</html>
