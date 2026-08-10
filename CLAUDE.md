@@ -37,3 +37,13 @@
 - **格子越大越好**：以不增加頁數為前提，逐頁把格子高度撐到最大（程式自動試印找最大值，再退 2px 保險）
 - A4 直式、老師版才有電話；輸出 PDF 供列印
 - 產生程式與最新版：scratchpad 的 `第6-8梯_點名表.html/.pdf`（含逐頁自動最大化格高的腳本）
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
