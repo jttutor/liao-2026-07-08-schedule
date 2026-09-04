@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>韓國行李清單</title>
+<style>
+:root{
+  --bg:#FAF7F2;
+  --surface:#FFFFFF;
+  --ink:#26221C;
+  --muted:#8A8377;
+  --line:#E7E0D4;
+  --blue:#2B4C9B;
+  --blue-soft:#E8EDF8;
+  --red:#C8443E;
+  --red-soft:#F9E9E8;
+  --done:#B4AD9F;
+  --shadow:0 1px 3px rgba(60,50,30,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C1A17;
+    --surface:#26231F;
+    --ink:#EDE8DF;
+    --muted:#9B9486;
+    --line:#3A362F;
+    --blue:#8AA6E4;
+    --blue-soft:#2A3350;
+    --red:#E58983;
+    --red-soft:#4A2E2C;
+    --done:#6B655A;
+    --shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C1A17;
+  --surface:#26231F;
+  --ink:#EDE8DF;
+  --muted:#9B9486;
+  --line:#3A362F;
+  --blue:#8AA6E4;
+  --blue-soft:#2A3350;
+  --red:#E58983;
+  --red-soft:#4A2E2C;
+  --done:#6B655A;
+  --shadow:0 1px 3px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  margin:0;
+  padding:0 16px 64px;
+  line-height:1.5;
+}
+.wrap{max-width:560px;margin:0 auto}
+header{padding:28px 4px 8px}
+.trip-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;letter-spacing:.12em;
+  color:var(--blue);
+}
+.trip-tag::before{content:"";width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(180deg,var(--red) 50%,var(--blue) 50%);}
+h1{
+  font-family:"Noto Serif TC","Noto Sans TC",serif;
+  font-size:30px;margin:6px 0 4px;letter-spacing:.02em;text-wrap:balance;
+}
+.dates{color:var(--muted);font-size:15px;margin:0}
+.dates b{color:var(--ink);font-weight:600}
+
+.progress-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:14px 16px;margin:18px 0 6px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.progress-row{display:flex;justify-content:space-between;align-items:baseline}
+.progress-num{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.progress-num small{font-size:14px;color:var(--muted);font-weight:500}
+.save-state{font-size:12px;color:var(--muted)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar-fill{height:100%;width:0%;border-radius:5px;background:var(--blue);transition:width .3s}
+.all-done{font-size:14px;color:var(--red);font-weight:700;display:none}
+
+section{margin-top:22px}
+.sec-head{
+  display:flex;align-items:baseline;gap:10px;padding:0 4px 8px;
+}
+.sec-mark{width:14px;height:14px;border-radius:4px;background:var(--blue);flex:none;align-self:center}
+section.sec-red .sec-mark{background:var(--red)}
+.sec-title{font-size:18px;font-weight:700;margin:0}
+.sec-note{font-size:13px;color:var(--muted)}
+.sec-count{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+ul.items{
+  list-style:none;margin:0;padding:0;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+li.item{border-top:1px solid var(--line)}
+li.item:first-child{border-top:none}
+.item label{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;min-height:56px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.box{
+  flex:none;width:26px;height:26px;border-radius:8px;
+  border:2px solid var(--muted);background:transparent;
+  display:grid;place-items:center;transition:all .15s;
+}
+.box svg{opacity:0;transform:scale(.5);transition:all .15s}
+.item input{position:absolute;opacity:0;width:1px;height:1px}
+.item input:focus-visible + .box{outline:3px solid var(--blue);outline-offset:2px}
+.item-name{font-size:17px;flex:1}
+.item-sub{display:block;font-size:13px;color:var(--muted);margin-top:1px}
+.qty{
+  flex:none;font-size:13px;font-weight:700;color:var(--blue);
+  background:var(--blue-soft);border-radius:999px;padding:3px 10px;
+  font-variant-numeric:tabular-nums;
+}
+.qty.red{color:var(--red);background:var(--red-soft)}
+li.item.checked .box{background:var(--blue);border-color:var(--blue)}
+li.item.checked .box svg{opacity:1;transform:scale(1)}
+li.item.checked .item-name{color:var(--done);text-decoration:line-through;text-decoration-thickness:2px}
+li.item.checked .item-sub{color:var(--done)}
+li.item.checked .qty{opacity:.45}
+
+footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){
+  .bar-fill,.box,.box svg{transition:none}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="trip-tag">KOREA · 韓國</div>
+    <h1>韓國行李清單</h1>
+    <p class="dates"><b>9/6（日）出發 → 9/9（三）回來</b>，四天三夜。<br>點一下格子就打勾，進度會記在你自己的手機裡！</p>
+  </header>
+
+  <div class="progress-card">
+    <div class="progress-row">
+      <div class="progress-num"><span id="doneN">0</span><small> / <span id="totalN">0</span> 項打包好了</small></div>
+      <div class="save-state" id="saveState"></div>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div class="all-done" id="allDone">全部打包完成，可以出發了！🎉</div>
+  </div>
+
+  <div id="sections"></div>
+
+  <footer>行李清單 · 兆婷 · 祝旅途愉快</footer>
+</div>
+
+<script>
+var SECTIONS = [
+  {
+    id:'docs', title:'證件與錢', note:'最重要，先檢查這區', red:true,
+    items:[
+      {id:'passport', name:'護照', sub:'看一下效期要超過六個月'},
+      {id:'keta', name:'查好入境規定（K-ETA）', sub:'出發前上網確認台灣護照要不要申請'},
+      {id:'ticket', name:'機票＋訂房資料', sub:'截圖存在手機，飯店地址也存好'},
+      {id:'copy', name:'護照影本＋大頭照2張', sub:'備用，跟護照分開放'},
+      {id:'money', name:'錢包', sub:'韓元現金＋信用卡（確認能海外刷）'},
+      {id:'tmoney', name:'T-money 交通卡', sub:'韓國版悠遊卡！到機場或超商（GS25、CU）就買得到，坐地鐵公車嗶一下'}
+    ]
+  },
+  {
+    id:'carry', title:'隨身包', note:'隨身帶在身上，不放行李箱', red:true,
+    items:[
+      {id:'powerbank', name:'行動電源', sub:'先充飽電；一定要隨身帶，不能託運'},
+      {id:'razor', name:'刮鬍刀'},
+      {id:'camera', name:'相機', sub:'記憶卡清空、電池充飽'},
+      {id:'phone', name:'手機'},
+      {id:'sim', name:'網卡或開漫遊', sub:'eSIM／網卡先買好、先設定好'},
+      {id:'earphone', name:'耳機', sub:'飛機上、坐車時用'},
+      {id:'pen', name:'原子筆', sub:'填入境表格用'}
+    ]
+  },
+  {
+    id:'clothes', title:'衣服', note:'9/6～9/9 四天份',
+    items:[
+      {id:'underwear', name:'內褲', qty:'×4'},
+      {id:'tops', name:'上衣', qty:'×4'},
+      {id:'pants', name:'褲子', qty:'×4'},
+      {id:'socks', name:'襪子', qty:'×4'},
+      {id:'sportshirt', name:'運動上衣', qty:'×2'},
+      {id:'shorts', name:'短褲', qty:'×1'},
+      {id:'jacket', name:'襯衫或外套', sub:'兩種選一種；九月早晚會涼', qty:'×1'},
+      {id:'sleepwear', name:'睡衣', sub:'輕便的一套'},
+      {id:'shoes', name:'鞋子', sub:'穿一雙好走的就夠了', qty:'×1雙'},
+      {id:'cap', name:'帽子', sub:'白天太陽還很大，遮陽用'}
+    ]
+  },
+  {
+    id:'charge', title:'充電用品',
+    items:[
+      {id:'adapter', name:'充電轉接頭', sub:'韓國插座是兩個圓孔（220V）'},
+      {id:'cable', name:'充電線'},
+      {id:'brick', name:'豆腐頭', sub:'插頭的白色小方塊'}
+    ]
+  },
+  {
+    id:'wash', title:'盥洗保養', note:'超過100ml的要放行李箱託運',
+    items:[
+      {id:'contacts', name:'隱形眼鏡', sub:'多帶一副備用更安心'},
+      {id:'solution', name:'隱形眼鏡藥水＋盒子', sub:'小瓶旅行裝就好'},
+      {id:'glasses', name:'備用眼鏡', sub:'眼睛不舒服時可以換'},
+      {id:'cleanser', name:'洗面乳'},
+      {id:'skincare', name:'保養品'},
+      {id:'sunscreen', name:'防曬乳'},
+      {id:'toothbrush', name:'牙刷牙膏', sub:'韓國很多飯店不提供'},
+      {id:'comb', name:'梳子／髮品'}
+    ]
+  },
+  {
+    id:'health', title:'藥品與健康',
+    items:[
+      {id:'mymeds', name:'個人常用藥', sub:'有固定吃的藥一定要帶夠'},
+      {id:'medicine', name:'腸胃藥、感冒藥、止痛藥', sub:'各帶一點點就好'},
+      {id:'bandaid', name:'OK繃', sub:'走很多路，腳磨破皮用得到'},
+      {id:'mask', name:'口罩', sub:'飛機上、人多的地方'}
+    ]
+  },
+  {
+    id:'extra', title:'建議加帶', note:'有帶更方便，沒帶也沒關係',
+    items:[
+      {id:'umbrella', name:'摺疊傘', sub:'九月偶爾會下雨'},
+      {id:'ecobag', name:'環保購物袋', sub:'韓國商店的塑膠袋要另外花錢買'},
+      {id:'bag', name:'塑膠袋或收納袋', sub:'裝髒衣服用'},
+      {id:'wipes', name:'濕紙巾＋面紙', sub:'韓國很多小吃店不給紙巾'},
+      {id:'bottle', name:'小水壺', sub:'過安檢後再裝水'}
+    ]
+  }
+];
+
+var checked = new Set();
+
+
+var CHECK_SVG = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5 6 12l7.5-8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function render(){
+  var root = document.getElementById('sections');
+  root.innerHTML = '';
+  SECTIONS.forEach(function(sec){
+    var s = document.createElement('section');
+    if(sec.red) s.className = 'sec-red';
+    var noteHtml = sec.note ? '<span class="sec-note">' + sec.note + '</span>' : '';
+    s.innerHTML =
+      '<div class="sec-head"><span class="sec-mark"></span>' +
+      '<h2 class="sec-title">' + sec.title + '</h2>' + noteHtml +
+      '<span class="sec-count" data-count="' + sec.id + '"></span></div>';
+    var ul = document.createElement('ul');
+    ul.className = 'items';
+    sec.items.forEach(function(it){
+      var li = document.createElement('li');
+      li.className = 'item' + (checked.has(it.id) ? ' checked' : '');
+      li.dataset.id = it.id;
+      var sub = it.sub ? '<span class="item-sub">' + it.sub + '</span>' : '';
+      var qty = it.qty ? '<span class="qty' + (sec.red ? ' red' : '') + '">' + it.qty + '</span>' : '';
+      li.innerHTML =
+        '<label><input type="checkbox"' + (checked.has(it.id) ? ' checked' : '') + '>' +
+        '<span class="box">' + CHECK_SVG + '</span>' +
+        '<span class="item-name">' + it.name + sub + '</span>' + qty + '</label>';
+      li.querySelector('input').addEventListener('change', function(){
+        toggle(it.id, li, this.checked);
+      });
+      ul.appendChild(li);
+    });
+    s.appendChild(ul);
+    root.appendChild(s);
+  });
+  updateProgress();
+}
+
+function toggle(id, li, on){
+  if(on) checked.add(id); else checked.delete(id);
+  li.classList.toggle('checked', on);
+  updateProgress();
+  scheduleSave();
+}
+
+function updateProgress(){
+  var total = 0, done = 0;
+  SECTIONS.forEach(function(sec){
+    var secDone = 0;
+    sec.items.forEach(function(it){
+      total++;
+      if(checked.has(it.id)){ done++; secDone++; }
+    });
+    var el = document.querySelector('[data-count="' + sec.id + '"]');
+    if(el) el.textContent = secDone + '/' + sec.items.length;
+  });
+  document.getElementById('doneN').textContent = done;
+  document.getElementById('totalN').textContent = total;
+  document.getElementById('barFill').style.width = (total ? Math.round(done/total*100) : 0) + '%';
+  document.getElementById('allDone').style.display = (done === total && total > 0) ? 'block' : 'none';
+}
+
+// ---- 儲存 ----
+var saveTimer = null;
+function scheduleSave(){
+  var el = document.getElementById('saveState');
+  el.textContent = '儲存中…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(doSave, 1500);
+}
+
+function stateJson(){
+  return JSON.stringify({checked: Array.from(checked)});
+}
+
+function doSave(){
+  var el = document.getElementById('saveState');
+  try{
+    localStorage.setItem('koreaPack', stateJson());
+    el.textContent = '已儲存 ✓';
+  }catch(e){
+    el.textContent = '';
+  }
+}
+
+try{
+  var raw = localStorage.getItem('koreaPack');
+  if(raw){
+    var data = JSON.parse(raw);
+    (data.checked||[]).forEach(function(id){ checked.add(id); });
+  }
+}catch(e){}
+
+render();
+</script>
+
+</body>
+</html>
