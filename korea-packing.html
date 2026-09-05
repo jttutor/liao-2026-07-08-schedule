@@ -145,8 +145,10 @@ li.item.checked .qty{opacity:.45}
 .meal-name{font-weight:500}
 .meal-addr{width:100%;font-size:13px;color:var(--muted);margin:0}
 a.lnk{font-size:13px;color:var(--blue);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:2px 10px;white-space:nowrap}
+.exp-form{display:flex;flex-direction:column;gap:8px;margin:6px 0}
+.exp-in{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;background:var(--bg);color:var(--ink)}
 .tm{flex:none;min-width:46px;font-size:14px;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}
-#planTab[hidden],#packTab[hidden]{display:none}
+#planTab[hidden],#packTab[hidden],#moneyTab[hidden]{display:none}
 footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){
   .bar-fill,.box,.box svg{transition:none}
@@ -165,6 +167,7 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
   <div class="tabs">
     <button type="button" class="tab-btn active" id="tabPack" onclick="showTab('pack')">🧳 行李清單</button>
     <button type="button" class="tab-btn" id="tabPlan" onclick="showTab('plan')">📅 行程表</button>
+    <button type="button" class="tab-btn" id="tabMoney" onclick="showTab('money')">💰 記帳</button>
   </div>
 
   <div id="planTab" hidden>
@@ -249,6 +252,30 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
 
   </div>
 
+  <div id="moneyTab" hidden>
+
+    <div class="day-card">
+      <div class="day-head"><span class="day-num">匯率</span><span class="day-title">₩10,000 ≈ NT$<span id="rate10k">234</span></span></div>
+      <div class="meal"><span class="meal-tag">設定</span><span class="meal-name">1 韓元 = <input id="rateIn" type="number" step="0.0001" value="0.0234" class="exp-in" style="width:90px"> 台幣</span><span class="meal-addr">預設是 9/6 的匯率（1 台幣 ≈ 43.5 韓元）；匯率變了直接改這格。</span></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-head"><span class="day-num">記一筆</span><span class="day-title">買了什麼就記下來</span></div>
+      <div class="exp-form">
+        <input id="expName" class="exp-in" placeholder="買了什麼（例：蔘雞湯）">
+        <input id="expAmt" class="exp-in" type="number" inputmode="numeric" placeholder="花了多少韓元 ₩">
+        <button type="button" class="tab-btn active" onclick="addExp()">＋ 記下來</button>
+      </div>
+      <div class="meal"><span class="meal-addr">記錄存在這支手機裡，換裝置不會跟過去。</span></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-head"><span class="day-num">合計</span><span class="day-title">₩<span id="sumK">0</span> ≈ NT$<span id="sumT">0</span></span></div>
+      <div id="expList"></div>
+    </div>
+
+  </div>
+
   <div id="packTab">
   <div class="progress-card">
     <div class="progress-row">
@@ -269,9 +296,55 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
 function showTab(t){
   document.getElementById('packTab').hidden = (t!=='pack');
   document.getElementById('planTab').hidden = (t!=='plan');
+  document.getElementById('moneyTab').hidden = (t!=='money');
   document.getElementById('tabPack').classList.toggle('active', t==='pack');
   document.getElementById('tabPlan').classList.toggle('active', t==='plan');
+  document.getElementById('tabMoney').classList.toggle('active', t==='money');
 }
+
+// ---- 記帳（存在自己手機的 localStorage）----
+var expenses = [];
+var exRate = 0.0234;
+try{
+  var _er = JSON.parse(localStorage.getItem('koreaExpense')||'{}');
+  if(_er.items) expenses = _er.items;
+  if(_er.rate) exRate = _er.rate;
+}catch(e){}
+
+function fmtN(n){ return n.toLocaleString('en-US'); }
+
+function renderExp(){
+  var list = document.getElementById('expList');
+  if(!list) return;
+  document.getElementById('rateIn').value = exRate;
+  document.getElementById('rate10k').textContent = fmtN(Math.round(10000*exRate));
+  var sum = 0, html = '';
+  expenses.forEach(function(it, i){
+    sum += it.amt;
+    html += '<div class="meal"><span class="meal-tag">₩' + fmtN(it.amt) + '</span><span class="meal-name">' + String(it.name).replace(/</g,'&lt;') + '</span><span class="tm">NT$' + fmtN(Math.round(it.amt*exRate)) + '</span><a class="lnk" href="#" onclick="delExp(' + i + ');return false;">刪</a></div>';
+  });
+  list.innerHTML = html || '<div class="meal"><span class="meal-name">還沒有紀錄，買了東西就記一筆吧！</span></div>';
+  document.getElementById('sumK').textContent = fmtN(sum);
+  document.getElementById('sumT').textContent = fmtN(Math.round(sum*exRate));
+}
+function saveExp(){
+  try{ localStorage.setItem('koreaExpense', JSON.stringify({items:expenses, rate:exRate})); }catch(e){}
+}
+function addExp(){
+  var n = document.getElementById('expName').value.trim();
+  var a = parseInt(document.getElementById('expAmt').value, 10);
+  if(!n || !a || a <= 0) return;
+  expenses.push({name:n, amt:a, t:Date.now()});
+  document.getElementById('expName').value = '';
+  document.getElementById('expAmt').value = '';
+  saveExp(); renderExp();
+}
+function delExp(i){ expenses.splice(i,1); saveExp(); renderExp(); }
+document.getElementById('rateIn').addEventListener('change', function(){
+  var v = parseFloat(this.value);
+  if(v > 0){ exRate = v; saveExp(); renderExp(); }
+});
+renderExp();
 
 var SECTIONS = [
   {
