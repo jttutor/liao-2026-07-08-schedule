@@ -165,55 +165,25 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
   </header>
 
   <div class="tabs">
-    <button type="button" class="tab-btn active" id="tabPack" onclick="showTab('pack')">🧳 行李清單</button>
-    <button type="button" class="tab-btn" id="tabPlan" onclick="showTab('plan')">📅 行程表</button>
+    <button type="button" class="tab-btn" id="tabPack" onclick="showTab('pack')">🧳 行李清單</button>
+    <button type="button" class="tab-btn active" id="tabPlan" onclick="showTab('plan')">📅 行程表</button>
     <button type="button" class="tab-btn" id="tabMoney" onclick="showTab('money')">💰 記帳</button>
   </div>
 
-  <div id="planTab" hidden>
+  <div id="planTab">
 
-    <div class="day-card sec-red">
-      <div class="day-head"><span class="day-num">必看</span><span class="day-title">預約與排隊攻略</span></div>
-      <div class="meal"><span class="meal-tag">要預約</span><span class="meal-name">Ilmi 醬蟹（明晚 9/8）✅ 已訂位</span><span class="meal-addr">已經訂好了，照時間到就好！電話 02-2242-4338。</span></div>
-      <div class="meal"><span class="meal-tag">神器</span><span class="meal-name">下載 CatchTable App（有英文版）</span><span class="meal-addr">外國電話號碼可註冊，韓國餐廳預約＋遠端排隊都靠它。很多店的排隊機只收韓國手機號，用它或直接請店員手寫登記（跟店員說 waiting please）。</span></div>
-      <div class="meal"><span class="meal-tag">錯峰</span><span class="meal-name">韓國人吃飯尖峰：12:00–13:00、18:30–20:00</span><span class="meal-addr">我們的行程都排在尖峰之前：醬蟹 10:30 開門衝第一輪、午餐 12:00 前入座、晚餐 18:10／19:00 卡在人潮前面。</span></div>
-      <div class="meal"><span class="meal-tag">好消息</span><span class="meal-name">聖水洞排在週一（9/7）</span><span class="meal-addr">網紅咖啡、甜點店平日人最少，SILD／Noseu／Maman 基本不用排。</span></div>
-      <div class="meal"><span class="meal-tag">規矩</span><span class="meal-name">韓國餐廳「人到齊才能入座」</span><span class="meal-addr">熱門店大家一起到再登記；燒肉、鰻魚店開門前 10 分鐘到門口等第一輪最省時間。</span></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-head"><span class="day-num">第一天</span><span class="day-title">9/6（日）安國・江南・景福宮</span></div>
-      <div class="route"><span class="stop">仁川</span><span class="arr">→</span><span class="stop">明洞</span><span class="arr">→</span><span class="stop">安國・北村</span><span class="arr">→</span><span class="stop">江南</span><span class="arr">→</span><span class="stop">新沙醫美</span><span class="arr">→</span><span class="stop">山草醬蟹晚餐</span><span class="arr">→</span><span class="stop">景福宮夜遊</span><span class="arr">→</span><span class="stop">明洞</span></div>
-      <div class="meal"><span class="tm">05:00</span><span class="meal-tag">航班</span><span class="meal-name">抵達仁川T2（LJ734 真航空）</span><span class="meal-addr">出關後搭機場快線直達車約 51 分到首爾站，再到明洞飯店寄放行李。</span></div>
-      <div class="meal"><span class="tm">08:00</span><span class="meal-tag">早餐</span><span class="meal-name">JO&amp;DJAWSON 法式吐司（乙支路）</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/JO%26DJAWSON">🗺 地圖</a><span class="meal-addr">朋友行程表上的名店，飯店走路可到；吃完再出發去安國。</span></div>
-      <div class="meal"><span class="tm">09:40</span><span class="meal-tag">散步</span><span class="meal-name">安國站・北村韓屋村</span><span class="meal-addr">明洞搭 4 號線到忠武路轉 3 號線到安國，約 15 分。</span></div>
-      <div class="meal"><span class="tm">11:00</span><span class="meal-tag">點心</span><span class="meal-name">Dotori 園林優格</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EB%8F%84%ED%86%A0%EB%A6%AC%20%EC%95%88%EA%B5%AD">🗺 地圖搜尋</a><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DZ9rdLkyp2G/?igsi=MTl1azQ2ZWlieTFtNA==">📸 看影片</a></div>
-      <div class="meal"><span class="tm">11:35</span><span class="meal-tag">交通</span><span class="meal-name">安國 → 新沙：3 號線直達約 25 分</span></div>
-      <div class="meal"><span class="tm">12:15</span><span class="meal-tag">午餐</span><span class="meal-name">江南 鰻魚餐廳</span><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/1da07a14-13a8-5c28-a3b9-94da05b1c656">🔗 餐廳資訊</a><span class="meal-addr">吃到 13:30，走去診所剛剛好。</span></div>
-      <div class="meal"><span class="tm">14:00</span><span class="meal-tag">醫美</span><span class="meal-name">新沙醫美療程（約 4 小時）</span><span class="meal-addr">新沙站 6 號出口直走 50 米 ICT 大樓 9 樓。</span></div>
-      <div class="meal"><span class="tm">18:00</span><span class="meal-tag">門票</span><span class="meal-name">景福宮夜間票 ₩3,000（請朋友先幫忙排）</span><span class="meal-addr">外國人現場票每天限量 300 張，18:30 在光化門進去右手邊售票亭開賣，只賣當天票、一定要帶護照！請住乙支路的朋友 18:00 先去幫大家排隊買票。如果沒人能先買票：就跳過山草直奔景福宮自己買，山草改到第三天晚上吃。穿韓服免費。</span></div>
-      <div class="meal"><span class="tm">18:10</span><span class="meal-tag">晚餐</span><span class="meal-name">山草醬蟹（Sancho）</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/5p0CnKbH">🗺 地圖</a><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DZsLv_-Sh31/?igsi=ODE2bnlzdnI3cG9h">📸 看影片</a><span class="meal-addr">江南區論峴洞 96——就在醫美診所附近！看完直接走過去吃，超順路。</span></div>
-      <div class="meal"><span class="tm">19:15</span><span class="meal-tag">交通</span><span class="meal-name">新沙 → 景福宮站：3 號線直達約 20 分</span></div>
-      <div class="meal"><span class="tm">19:40</span><span class="meal-tag">景點</span><span class="meal-name">景福宮夜遊</span><span class="meal-addr">20:30 最後入場、21:30 關門，還能逛快 2 小時。</span></div>
-      <div class="meal"><span class="tm">21:30</span><span class="meal-tag">宵夜</span><span class="meal-name">無垢屋蔘雞湯 或 Joaen Doseun（吃得下再去）</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EB%AC%B4%EA%B5%AC%EC%98%A5">🗺 蔘雞湯地圖</a><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DafgjqKuKuY/?igsi=N2NwYms2YXN5cW1v">📸 蔘雞湯</a><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/G4dHmuOd">🗺 Joaen Doseun</a><span class="meal-addr">無垢屋在鐘路區栗谷路1街 7（韓屋老宅），就在景福宮旁邊、出來走幾分鐘就到！Joaen Doseun 在光化門旁。先確認開到幾點，都關了就回明洞吃宵夜。</span></div>
-      <div class="meal"><span class="tm">22:00</span><span class="meal-tag">回程</span><span class="meal-name">回明洞飯店休息</span></div>
-      <div class="meal"><span class="meal-tag">備用</span><span class="meal-name">其他餐廳口袋名單</span><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/6be77946-9358-5cbd-b0ac-c3f5fc584bc2">🔗 名單</a></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-head"><span class="day-num">第二天</span><span class="day-title">9/7（一）補吃早餐・聖水洞・東大門</span></div>
-      <div class="route"><span class="stop">乙支路法式吐司</span><span class="arr">→</span><span class="stop">安國 Dotori</span><span class="arr">→</span><span class="stop">聖水洞</span><span class="arr">→</span><span class="stop">東大門</span><span class="arr">→</span><span class="stop">明洞</span></div>
-      <div class="meal"><span class="tm">09:00</span><span class="meal-tag">早餐</span><span class="meal-name">JO&amp;DJAWSON 法式吐司（昨天沒吃到，今天補！）</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/JO%26DJAWSON">🗺 地圖</a><span class="meal-addr">乙支路，飯店走路可到。</span></div>
-      <div class="meal"><span class="tm">10:30</span><span class="meal-tag">點心</span><span class="meal-name">Dotori 園林優格（安國站）</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EB%8F%84%ED%86%A0%EB%A6%AC%20%EC%95%88%EA%B5%AD">🗺 地圖搜尋</a><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DZ9rdLkyp2G/?igsi=MTl1azQ2ZWlieTFtNA==">📸 看影片</a><span class="meal-addr">明洞搭 4 號線到忠武路轉 3 號線到安國；吃完有空可以快逛北村韓屋村。</span></div>
-      <div class="meal"><span class="tm">12:00</span><span class="meal-tag">交通</span><span class="meal-name">安國 → 聖水：3 號線到乙支路3街轉 2 號線，約 30 分</span></div>
-      <div class="meal"><span class="tm">12:40</span><span class="meal-tag">午餐</span><span class="meal-name">刀削麵 或 海鮮刀削麵</span><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/e1aa6d87-5931-53e0-b3f9-c4e475f51c79">🔗 刀削麵</a><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/a4167e26-7c91-5599-9836-b9e8be2436a3">🔗 海鮮刀削麵</a><span class="meal-addr">蒸籠海鮮今天先跳過，想吃再說。</span></div>
-      <div class="meal"><span class="tm">14:00</span><span class="meal-tag">甜點</span><span class="meal-name">Noseu 聖水店（學生推薦）</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/xIFklfGV">🗺 地圖</a><span class="meal-addr">聖水站 3 號出口 225 公尺（聖水洞二街 315-11）。</span></div>
-      <div class="meal"><span class="tm">14:40</span><span class="meal-tag">甜點</span><span class="meal-name">Maman Gelato 聖水店</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/5Mv6ZLLu">🗺 地圖</a><span class="meal-addr">就在 Noseu 隔壁幾間，兩家一次收！</span></div>
-      <div class="meal"><span class="meal-tag">加碼</span><span class="meal-name">Mario's</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/574g7whT">🗺 地圖</a><span class="meal-addr">聖水洞二街 299-50，吃得下再去。</span></div>
-      <div class="meal"><span class="tm">15:30</span><span class="meal-tag">散步</span><span class="meal-name">SILD／BriBeet 咖啡＋聖水街區拍照</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/SILD%20%EC%84%B1%EC%88%98">🗺 SILD</a><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/GZDGt4oK">🗺 BriBeet</a><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/d2b050da-4dfa-54f3-91c6-c940821763de">🔗 一日遊路線</a></div>
-      <div class="meal"><span class="tm">17:30</span><span class="meal-tag">交通</span><span class="meal-name">聖水 → 東大門：2 號線約 20 分</span></div>
-      <div class="meal"><span class="tm">18:00</span><span class="meal-tag">逛街</span><span class="meal-name">DDP・東大門逛逛</span></div>
-      <div class="meal"><span class="tm">19:00</span><span class="meal-tag">晚餐</span><span class="meal-name">東大門 蒸牡蠣</span><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DSm2YaDEUXA/?igsi=MXVqbzVzbmhyY28yZg==">📸 看影片</a><span class="meal-addr">吃完繼續逛東大門夜景。</span></div>
+<div class="day-card">
+      <div class="day-head"><span class="day-num">今天</span><span class="day-title">9/7（一）聖水洞・東大門</span></div>
+      <div class="route"><span class="stop">安國優格 ✅</span><span class="arr">→</span><span class="stop">乙支路法式吐司</span><span class="arr">→</span><span class="stop">聖水洞</span><span class="arr">→</span><span class="stop">東大門</span><span class="arr">→</span><span class="stop">明洞</span></div>
+      <div class="meal"><span class="meal-tag">完成</span><span class="meal-name">✅ Dotori 園林優格（₩32,000 已記帳）</span></div>
+      <div class="meal"><span class="tm">14:30</span><span class="meal-tag">早午餐</span><span class="meal-name">JO&amp;DJAWSON 法式吐司</span><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/JO%26DJAWSON">🗺 地圖</a><span class="meal-addr">安國搭 3 號線 2 站到乙支路3街，或散步約 20 分。</span></div>
+      <div class="meal"><span class="tm">15:45</span><span class="meal-tag">交通</span><span class="meal-name">乙支路3街 搭 2 號線直達聖水，約 15 分</span></div>
+      <div class="meal"><span class="tm">16:15</span><span class="meal-tag">甜點</span><span class="meal-name">Noseu 聖水店（學生推薦）</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/xIFklfGV">🗺 地圖</a><span class="meal-addr">聖水站 3 號出口 225 公尺。</span></div>
+      <div class="meal"><span class="tm">16:45</span><span class="meal-tag">甜點</span><span class="meal-name">Maman Gelato 聖水店</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/5Mv6ZLLu">🗺 地圖</a><span class="meal-addr">就在 Noseu 隔壁幾間。</span></div>
+      <div class="meal"><span class="meal-tag">加碼</span><span class="meal-name">Mario's／SILD／BriBeet・聖水街區拍照</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/574g7whT">🗺 Mario's</a><a class="lnk" target="_blank" rel="noopener" href="https://map.naver.com/p/search/SILD%20%EC%84%B1%EC%88%98">🗺 SILD</a><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/GZDGt4oK">🗺 BriBeet</a></div>
+      <div class="meal"><span class="meal-tag">加碼</span><span class="meal-name">刀削麵（肚子餓再吃）</span><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/e1aa6d87-5931-53e0-b3f9-c4e475f51c79">🔗 刀削麵</a><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/a4167e26-7c91-5599-9836-b9e8be2436a3">🔗 海鮮刀削麵</a></div>
+      <div class="meal"><span class="tm">18:15</span><span class="meal-tag">交通</span><span class="meal-name">聖水 → 東大門：2 號線約 20 分</span></div>
+      <div class="meal"><span class="tm">19:00</span><span class="meal-tag">晚餐</span><span class="meal-name">東大門 蒸牡蠣</span><a class="lnk" target="_blank" rel="noopener" href="https://www.instagram.com/reel/DSm2YaDEUXA/?igsi=MXVqbzVzbmhyY28yZg==">📸 看影片</a><span class="meal-addr">吃完逛 DDP 夜景。</span></div>
       <div class="meal"><span class="tm">21:00</span><span class="meal-tag">回程</span><span class="meal-name">回明洞飯店</span><span class="meal-addr">4 號線兩站就到。</span></div>
     </div>
 
@@ -227,7 +197,7 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
       <div class="meal"><span class="tm">15:30</span><span class="meal-tag">加碼</span><span class="meal-name">明洞韓國牛肉（吃得下再去）</span><a class="lnk" target="_blank" rel="noopener" href="https://albo.inc/import/dd276825-8c72-5b6d-8e1a-8ed9f98970ec">🔗 資訊</a><span class="meal-addr">不去的話就繼續逛街，戰利品先拿回飯店放。</span></div>
       <div class="meal"><span class="tm">17:30</span><span class="meal-tag">交通</span><span class="meal-name">明洞 → 東大門：4 號線約 10 分</span></div>
       <div class="meal"><span class="tm">18:00</span><span class="meal-tag">逛街</span><span class="meal-name">東大門補逛</span></div>
-      <div class="meal"><span class="tm">19:00</span><span class="meal-tag">晚餐</span><span class="meal-name">Ilmi 醬蟹</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/x52dHBXI">🗺 地圖</a><span class="meal-addr">長安洞 367-3：東大門歷史文化公園站搭 5 號線 4 站到長漢坪站再走幾分鐘，或計程車約 10 分。如果第一天沒吃到山草，也可以今晚改搭 3 號線去江南吃山草。</span></div>
+      <div class="meal"><span class="tm">19:00</span><span class="meal-tag">晚餐</span><span class="meal-name">Ilmi 醬蟹 ✅ 已訂位</span><a class="lnk" target="_blank" rel="noopener" href="https://naver.me/x52dHBXI">🗺 地圖</a><span class="meal-addr">長安洞 367-3：東大門歷史文化公園站搭 5 號線 4 站到長漢坪站再走幾分鐘，或計程車約 10 分。照訂位時間到就好。</span></div>
       <div class="meal"><span class="tm">21:00</span><span class="meal-tag">回程</span><span class="meal-name">回明洞飯店</span></div>
     </div>
 
@@ -243,6 +213,24 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
       <div class="meal"><span class="tm">15:30</span><span class="meal-tag">交通</span><span class="meal-name">首爾站搭機場快線（普通車）→ 金浦約 22 分</span><span class="meal-addr">時間很寬鬆；真的最晚 17:30 要上車。</span></div>
       <div class="meal"><span class="tm">16:30</span><span class="meal-tag">機場</span><span class="meal-name">金浦機場報到・安檢</span><span class="meal-addr">注意是金浦不是仁川！</span></div>
       <div class="meal"><span class="tm">20:20</span><span class="meal-tag">航班</span><span class="meal-name">BR155 長榮 金浦 → 21:55 松山</span><span class="meal-addr">回台北！辛苦了，旅途圓滿 🎉</span></div>
+    </div>
+
+    <div class="day-card sec-red">
+      <div class="day-head"><span class="day-num">必看</span><span class="day-title">預約與排隊攻略</span></div>
+      <div class="meal"><span class="meal-tag">要預約</span><span class="meal-name">Ilmi 醬蟹（明晚 9/8）✅ 已訂位</span><span class="meal-addr">已經訂好了，照時間到就好！電話 02-2242-4338。</span></div>
+      <div class="meal"><span class="meal-tag">神器</span><span class="meal-name">下載 CatchTable App（有英文版）</span><span class="meal-addr">外國電話號碼可註冊，韓國餐廳預約＋遠端排隊都靠它。很多店的排隊機只收韓國手機號，用它或直接請店員手寫登記（跟店員說 waiting please）。</span></div>
+      <div class="meal"><span class="meal-tag">錯峰</span><span class="meal-name">韓國人吃飯尖峰：12:00–13:00、18:30–20:00</span><span class="meal-addr">我們的行程都排在尖峰之前：醬蟹 10:30 開門衝第一輪、午餐 12:00 前入座、晚餐 18:10／19:00 卡在人潮前面。</span></div>
+      <div class="meal"><span class="meal-tag">好消息</span><span class="meal-name">聖水洞排在週一（9/7）</span><span class="meal-addr">網紅咖啡、甜點店平日人最少，SILD／Noseu／Maman 基本不用排。</span></div>
+      <div class="meal"><span class="meal-tag">規矩</span><span class="meal-name">韓國餐廳「人到齊才能入座」</span><span class="meal-addr">熱門店大家一起到再登記；燒肉、鰻魚店開門前 10 分鐘到門口等第一輪最省時間。</span></div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-head"><span class="day-num">昨天</span><span class="day-title">9/6（日）已完成 🎉</span></div>
+      <div class="meal"><span class="meal-tag">✅</span><span class="meal-name">抵達仁川 → 明洞飯店 → 換錢 → 明洞甜點</span></div>
+      <div class="meal"><span class="meal-tag">✅</span><span class="meal-name">江南 鰻魚午餐</span></div>
+      <div class="meal"><span class="meal-tag">✅</span><span class="meal-name">新沙 醫美療程</span></div>
+      <div class="meal"><span class="meal-tag">✅</span><span class="meal-name">山草醬蟹＋旁邊的蛋塔</span></div>
+      <div class="meal"><span class="meal-tag">✅</span><span class="meal-name">明洞逛街</span></div>
     </div>
 
     <div class="day-card">
@@ -277,7 +265,7 @@ footer{margin-top:32px;text-align:center;font-size:13px;color:var(--muted)}
 
   </div>
 
-  <div id="packTab">
+  <div id="packTab" hidden>
   <div class="progress-card">
     <div class="progress-row">
       <div class="progress-num"><span id="doneN">0</span><small> / <span id="totalN">0</span> 項打包好了</small></div>
